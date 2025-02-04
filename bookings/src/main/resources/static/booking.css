@@ -1,0 +1,31 @@
+.info tr, .info td {
+    border: 3px solid;
+    font-size: 30px;
+    padding: 15px;
+}
+
+
+a{
+    font-size: 30px;
+}
+
+
+
+header{
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+
+.booking {
+    font-size: 45px;
+}
+
+.booking input{
+    font-size: 35px;
+    height: 35px;
+}
+.booking button{
+    font-size: 25px;
+    height: 35px;
+}

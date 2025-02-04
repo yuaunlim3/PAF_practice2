@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings</title>
+    <link rel="stylesheet" href="/booking.css">
+</head>
+<body>
+    <a href="/landingpage"> Back</a>
+
+    <main data-th-if="${info != null}">
+        <div class = "info">
+            <table >
+                <tr>
+                    <td>ID</td>
+                    <td><span data-th-text="${info.id}"></span></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><span data-th-text="${info.description}"></span></td>
+                    <td><img data-th-src="${info.image}" alt = "image"></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td><span data-th-text="${info.address}"></span></td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td><span data-th-text="${info.price}"></span></td>
+                </tr>
+                <tr>
+                    <td>
+                        Amenities:
+                    </td>
+                    <td>
+                        <ul>
+                            <li data-th-each="amenity : ${info.amenities}" data-th-text="${amenity}"></li>
+                        </ul>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+    
+    
+        <form action="/book" method="GET" data-th-object = "${booking}" class="booking" data-th-if="${error == null || error.isEmpty()}">
+            <input type="hidden" name="search" data-th-value="${search}">
+            <input type="hidden" name="id" data-th-value="${id}">
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" data-th-field = "*{name}"></td>
+                    <td>
+                        <p data-th-if="${#fields.hasErrors('name')}">
+                            <ul>
+                              <li data-th-each="err :${#fields.errors('name')}" class="error">
+                                <span data-th-text="${err}"></span>
+                              </li>
+                            </ul>
+                          </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" data-th-field ="*{email}"></td>
+                    <td>
+                        <p data-th-if="${#fields.hasErrors('email')}">
+                            <ul>
+                              <li data-th-each="err :${#fields.errors('email')}" class="error">
+                                <span data-th-text="${err}"></span>
+                              </li>
+                            </ul>
+                          </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Arrival</td>
+                    <td><input type="date" data-th-field ="*{date}"></td>
+                    <td>
+                        <p data-th-if="${#fields.hasErrors('date')}">
+                            <ul>
+                              <li data-th-each="err :${#fields.errors('date')}" class="error">
+                                <span data-th-text="${err}"></span>
+                              </li>
+                            </ul>
+                          </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Stay</td>
+                    <td><input type="text" data-th-field ="*{stay}"> days</td>
+                    <td>
+                        <p data-th-if="${#fields.hasErrors('stay')}">
+                            <ul>
+                              <li data-th-each="err :${#fields.errors('stay')}" class="error">
+                                <span data-th-text="${err}"></span>
+                              </li>
+                            </ul>
+                          </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Book</button></td>
+                </tr>
+            </table>
+        </form>
+    </main>
+    <div data-th-if="${error != null && !error.isEmpty()}">
+        <span data-th-text="${error}"></span>
+    </div>
+
+    <main data-th-if="${info == null}">
+
+        <span>No Data avaliable</span>
+    </main>
+</body>
+</html>

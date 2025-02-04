@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="/landing.css">
+</head>
+<body>
+    <div>
+        <header>Search Our Accomodations</header>
+        <form action="/search" method="GET" data-th-object = "${search}">
+            <table>
+                <tr>
+                    <td>Country: </td>
+                    <td><select data-th-field = "*{country}" >
+                        <option data-th-each="country: ${countries}" data-th-value="${country}" data-th-text="${country}"></option>
+                    </select></td>
+                    <td>
+                        <p data-th-if="${#fields.hasErrors('country')}">
+                            <ul>
+                              <li data-th-each="err :${#fields.errors('country')}" class="error">
+                                <span data-th-text="${err}"></span>
+                              </li>
+                            </ul>
+                          </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Number of person: </td>
+                    <td><input type="number" data-th-field = "*{people}" placeholder="Enter number of pax"></td>
+                    <td>
+                        <p data-th-if="${#fields.hasErrors('people')}">
+                            <ul>
+                              <li data-th-each="err :${#fields.errors('people')}" class="error">
+                                <span data-th-text="${err}"></span>
+                              </li>
+                            </ul>
+                          </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Price Range: </td>
+                    <td>Min <input type="text" data-th-field = "*{min}">  Max <input type="text" data-th-field = "*{max}"></td>
+                    <td>
+                        <p data-th-if="${#fields.hasErrors('min')}">
+                            <ul>
+                              <li data-th-each="err :${#fields.errors('min')}" class="error">
+                                <span data-th-text="${err}"></span>
+                              </li>
+                            </ul>
+                          </p>
+                    </td>
+                    <td>
+                        <p data-th-if="${#fields.hasErrors('max')}">
+                            <ul>
+                              <li data-th-each="err :${#fields.errors('max')}" class="error">
+                                <span data-th-text="${err}"></span>
+                              </li>
+                            </ul>
+                          </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Search</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing page</title>
+    <link rel="stylesheet" href="/listing.css">
+</head>
+<body>
+    <header>Listings for <span data-th-text="${search.country}"></span></header>
+
+    <a href="/landingpage"> Back</a>
+
+    <div data-th-if="${!accoms.isEmpty()}">
+        <table>
+            <tr>
+                <td>Address</td>
+                <td>Price</td>
+                <td>Image</td>
+            </tr>
+            <tr data-th-each = "accom: ${accoms}">
+                <td><span data-th-text="${accom.name}"></span></td>
+                <td><span data-th-text="${accom.price}"></span></td>
+                <td><img data-th-src="${accom.image}" alt = "image"></td>
+                <td>
+                    <form data-th-action="@{/getDetails/{id}(id=${accom.id})}" method="GET">
+                        <input type="hidden" name="search" data-th-value = "${search}">
+                        <button>Details</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div data-th-if="${accoms.isEmpty()}">
+        <span> No accommodation avaliable</span>
+    </div>
+
+</body>
+</html>
